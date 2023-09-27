@@ -16,6 +16,8 @@ cd colmap-manage
 cd ../ns2
 rm -rf build
 
+git checkout -b neuspp origin/neuspp
+
 pip install -r requirements.txt
 
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
