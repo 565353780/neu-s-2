@@ -11,7 +11,7 @@ https://github.com/19reborn/NeuS2
 ```bash
 gcc-11 & g++-11
 cuda-12.2
-optix-7.5.0
+optix-7.6.0
 ```
 
 and set
@@ -19,7 +19,7 @@ and set
 ```bash
 ~/.zshrc
 ->
-export OptiX_INSTALL_DIR=$HOME/NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64/
+export OptiX_INSTALL_DIR=$HOME/NVIDIA-OptiX-SDK-7.6.0-linux64-x86_64/
 ```
 
 ## Install
