@@ -25,6 +25,6 @@ def trainNS2(dataset_folder_path):
         return False
 
     shutil.move(dataset_folder_path + 'output/',
-                '../neu-s-2/output')
+                '../neu-s-2/output/' + dataset_name)
 
     return True
