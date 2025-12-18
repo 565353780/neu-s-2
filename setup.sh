@@ -1,27 +1,32 @@
 cd ..
 git clone https://github.com/565353780/colmap-manage.git
-git clone --recursive https://github.com/19reborn/NeuS2 ns2
+git clone https://github.com/facebookresearch/pytorch3d.git
 
-wget -qO- https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo tee /etc/apt/trusted.gpg.d/lunarg.asc
-sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-jammy.list https://packages.lunarg.com/vulkan/lunarg-vulkan-jammy.list
-sudo apt update
-sudo apt install vulkan-sdk
+conda install cmake -y
 
-sudo apt-get install build-essential git python3-dev python3-pip libopenexr-dev libxi-dev \
-	libglfw3-dev libglew-dev libomp-dev libxinerama-dev libxcursor-dev
+conda install -c conda-forge xorg-libxrandr xorg-libxinerama \
+  xorg-libxcursor xorg-libxi glew mesalib -y
+conda install -c anaconda mesa-libgl-cos6-x86_64 -y
+conda install -c menpo glfw3 -y
 
-cd colmap-manage
-./setup.sh
+#if [ !f "${CONDA_PREFIX}/lib/libGL.so" ]; then
+#  ln -s ${CONDA_PREFIX}/lib/libGL.so.1 ${CONDA_PREFIX}/lib/libGL.so
+#fi
 
-cd ../ns2
+pip install torch torchvision torchaudio \
+  --index-url https://download.pytorch.org/whl/cu124
+
+cd pytorch3d
+python setup.py install
+
+cd ../colmap-manage
+./dev_setup.sh
+
+cd ../neu-s-2
 rm -rf build
 
-git checkout -b neuspp origin/neuspp
-
-pip install -r requirements.txt
-
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-pip install "git+https://github.com/facebookresearch/pytorch3d.git"
+pip install commentjson imageio numpy pybind11 scipy \
+  tqdm opencv-python trimesh tensorboard
 
 cmake . -B build
 cmake --build build --config RelWithDebInfo -j
