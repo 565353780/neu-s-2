@@ -144,6 +144,16 @@ if (NGP_BUILD_WITH_GUI)
 	set(GLFW_VULKAN_STATIC OFF CACHE BOOL " " FORCE)
 	set(BUILD_SHARED_LIBS ON CACHE BOOL " " FORCE)
 
+  find_package(PkgConfig REQUIRED)
+
+  pkg_check_modules(X11 REQUIRED x11)
+  pkg_check_modules(XCURSOR REQUIRED xcursor)
+
+  include_directories(
+      ${X11_INCLUDE_DIRS}
+      ${XCURSOR_INCLUDE_DIRS}
+  )
+
 	add_subdirectory(dependencies/glfw)
 
 	set_target_properties(glfw PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)

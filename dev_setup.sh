@@ -4,8 +4,10 @@ git clone https://github.com/facebookresearch/pytorch3d.git
 
 conda install cmake -y
 
-conda install -c conda-forge xorg-libxrandr xorg-libxinerama \
-  xorg-libxcursor xorg-libxi glew mesalib -y
+pip install ninja
+
+conda install -c conda-forge pkg-config xorg-libxrandr \
+  xorg-libxinerama xorg-libxcursor xorg-libxi glew mesalib -y
 conda install -c anaconda mesa-libgl-cos6-x86_64 -y
 conda install -c menpo glfw3 -y
 
@@ -16,6 +18,9 @@ conda install -c menpo glfw3 -y
 pip install torch torchvision torchaudio \
   --index-url https://download.pytorch.org/whl/cu124
 
+pip install commentjson imageio numpy pybind11 scipy \
+  tqdm opencv-python trimesh tensorboard
+
 cd pytorch3d
 python setup.py install
 
@@ -25,8 +30,10 @@ cd ../colmap-manage
 cd ../neu-s-2
 rm -rf build
 
-pip install commentjson imageio numpy pybind11 scipy \
-  tqdm opencv-python trimesh tensorboard
+mkdir build
+cd build
 
-cmake . -B build
-cmake --build build --config RelWithDebInfo -j
+PKG_CONFIG_PATH="$CONDA_PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH" \
+  cmake ..
+
+make -j
