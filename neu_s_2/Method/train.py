@@ -12,9 +12,9 @@ def trainNS2(dataset_folder_path):
     if os.path.exists('../neu-s-2/output/' + dataset_name + '/'):
         shutil.rmtree('../neu-s-2/output/' + dataset_name + '/')
 
-    cmd = 'cd ../ns2 && ./build/testbed' + \
+    cmd = 'cd ../neu-s-2 && ./build/testbed' + \
         ' --scene ' + dataset_folder_path + \
-        ' --config ' + '../ns2/configs/nerf/base.json'
+        ' --config ' + '../neu-s-2/configs/nerf/base.json'
 
     if not runCMD(cmd, True):
         print('[ERROR][train::trainNS2]')
