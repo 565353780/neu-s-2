@@ -1,4 +1,5 @@
 import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
 from neu_s_2.Method.train import trainNS2
 
