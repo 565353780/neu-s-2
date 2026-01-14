@@ -19,7 +19,7 @@ pip install torch torchvision torchaudio \
   --index-url https://download.pytorch.org/whl/cu124
 
 pip install commentjson imageio numpy pybind11 scipy \
-  tqdm opencv-python trimesh tensorboard
+  tqdm opencv-python trimesh tensorboard iopath termcolor
 
 cd pytorch3d
 python setup.py install
